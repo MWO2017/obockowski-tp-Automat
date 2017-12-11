@@ -11,14 +11,17 @@ class Automat:
         self.__liczba_puszek=puszki
         self.__wrzucone=wrzucone
 
-    def pobierz_monete(self):
-        self.__liczba_monet+=1
-        self.__wrzucone+=1
+    def pobierz_monete(self,monety):
+        self.__liczba_monet+=monety
+        self.__wrzucone+=monety
 
-    def wydaj_puszke(self):
-        if (self.__liczba_puszek > 0) and (self.__wrzucone>0):
-            self.__liczba_puszek-=self.__wrzucone
-            self.__wrzucone=0
+    def wydaj_puszke(self,ile):
+        #logika dla wydawania puszek i reszty
+        if (self.__liczba_puszek >= ile) and (self.__wrzucone>=ile):
+            self.__liczba_puszek-=ile
+            self.__wrzucone-=ile
+            if self.__wrzucone > 0:
+                self.__zwroc_monete()
             return True
         else:
             return False
@@ -33,10 +36,10 @@ class Automat:
 
 if __name__ == '__main__':
     a=Automat(10,50)
-    a.pobierz_monete()
-    a.pobierz_monete()
+    a.pobierz_monete(8)
+    a.pobierz_monete(2)
     a.podaj_ile()
-    a.wydaj_puszke()
+    a.wydaj_puszke(6)
     a.podaj_ile()
 
 
